@@ -77,18 +77,22 @@ export default function Wheel({
           alt="wheel"
           style={{
             position: "relative",
-            width: "100%",
-            height: "100%",
+            width: "90%",
+            height: "90%",
             margin: "0 auto",
           }}
         />
       </RotationContainer>
-      <img src="./woay_vien.webp" alt="" className="absolute " />
+      <img
+        src="./woay_vien.webp"
+        alt=""
+        className="absolute w-[90%] h-[90%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      />
       <img
         src="./tam_woay.webp"
         alt="button"
         onClick={() => onClick()}
-        className="cursor-pointer relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px]"
+        className="cursor-pointer relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px]"
       />
     </>
   );

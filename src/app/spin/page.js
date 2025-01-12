@@ -19,7 +19,6 @@ export default function Home() {
   const [resultWinSpin, setResultWinSpin] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
-  console.log("🚀 ~ Home ~ showModal:", showModal);
 
   const openModal = () => {
     setShowModal(true);
@@ -49,7 +48,6 @@ export default function Home() {
 
   useEffect(() => {
     const userData = localStorage.getItem("spinUser");
-    console.log("🚀 ~ useEffect ~ userData:", userData);
 
     if (!userData) {
       router.push("/");
@@ -67,7 +65,7 @@ export default function Home() {
         </p>
       </div>
       <div
-        className=" lg:hidden App bg-cover bg-no-repeat h-dvh flex flex-col justify-between pt-14 pb-32"
+        className=" lg:hidden App bg-cover bg-no-repeat h-dvh flex flex-col justify-between pt-10 pb-16"
         style={{ backgroundImage: "url('./background1.webp')" }}
       >
         <div className="sm:w-[60%] w-[100%] sm:h-[60vw] h-[100vw] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

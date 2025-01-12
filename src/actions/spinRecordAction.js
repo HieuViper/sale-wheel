@@ -1,10 +1,13 @@
 "use server";
 
+import dbConnect from "@/dbConnect/dbConnect";
 import SpinRecord from "@/models/SpinRecords";
 import WheelSegments from "@/models/WheelSegments";
 
 export const spinWheel = async (userData) => {
   try {
+    await dbConnect();
+
     const segments = await WheelSegments.find({ quantity: { $gt: 0 } });
 
     if (segments.length === 0) {
