@@ -1,5 +1,8 @@
-import StyledComponentsRegistry from "@/utils/registry";
-import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import StyledComponentsRegistry from "@/lib/registry";
+import { Geist } from "next/font/google";
+import localFont from "next/font/local";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -7,9 +10,30 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const utf_avo = localFont({
+  src: [
+    {
+      path: "../../public/font/UTM_Avo.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/UTM_AvoItalic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../../public/font/UTM_AvoBold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/UTM_AvoBold_Italic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-utf-avo",
 });
 
 export const metadata = {
@@ -19,11 +43,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${utf_avo.variable} antialiased`}>
+        <StyledComponentsRegistry>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster position="top-right" />
+          </ThemeProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

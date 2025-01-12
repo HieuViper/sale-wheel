@@ -1,6 +1,6 @@
 "use client";
 
-import { getRotationDegrees } from "@/utils/utils";
+import { getRotationDegrees } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { RotationContainer } from "./RotationContainer";
 
@@ -73,7 +73,7 @@ export default function Wheel({
         finalrotationdegrees={finalrotationdegrees}
       >
         <img
-          src="./woaydemo.webp"
+          src="./woay_TN.webp"
           alt="wheel"
           style={{
             position: "relative",
@@ -83,6 +83,7 @@ export default function Wheel({
           }}
         />
       </RotationContainer>
+      <img src="./woay_vien.webp" alt="" className="absolute " />
       <img
         src="./tam_woay.webp"
         alt="button"
