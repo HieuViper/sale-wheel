@@ -4,7 +4,6 @@ import { formatDateTimeToCustomString } from "@/lib/utils";
 import { download, generateCsv, mkConfig } from "export-to-csv";
 
 export default function ExportExcel({ data }) {
-  console.log("🚀 ~ ExportExcel ~ data:", data);
   const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
   const transformData = data.map((item) => ({

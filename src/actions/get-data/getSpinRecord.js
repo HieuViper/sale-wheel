@@ -10,18 +10,20 @@ export const getSpinRecord = async (
   try {
     await dbConnect();
 
-    console.log(startDate, endDate);
-
     const query = {};
 
     if (startDate) {
       const start = new Date(startDate);
       query.spinAt = { ...query.spinAt, $gte: start };
-    }
-    if (endDate) {
+    } else if (endDate) {
       const end = new Date(endDate);
       end.setHours(23, 59, 59, 999);
       query.spinAt = { ...query.spinAt, $lte: end };
+    } else {
+      const start = new Date("2025-01-01T00:00:00.000Z");
+      const end = new Date("2025-01-21T00:00:00.000Z");
+      end.setHours(23, 59, 59, 999);
+      query.spinAt = { ...query.spinAt, $gte: start, $lte: end };
     }
 
     const items = await SpinRecord.find(query)

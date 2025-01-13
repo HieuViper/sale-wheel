@@ -8,9 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import dynamic from "next/dynamic";
 import DatePicker from "./(components)/spin-records/DatePicker";
-import ExportExcel from "./(components)/spin-records/ExportExcel";
 import TableSpinRecord from "./(components)/spin-records/TableSpinRecord";
+const ExportExcel = dynamic(() =>
+  import("./(components)/spin-records/ExportExcel")
+);
 
 export default async function DashboardPage({ searchParams }) {
   const pageSize = (await searchParams).pageSize || 2;
@@ -20,7 +23,6 @@ export default async function DashboardPage({ searchParams }) {
   const endDate = (await searchParams).endDate || null;
 
   const data = await getSpinRecord(pageSize, pageIndex, startDate, endDate);
-  console.log("🚀 ~ DashboardPage ~ data:", data);
 
   return (
     <Card>
@@ -31,7 +33,9 @@ export default async function DashboardPage({ searchParams }) {
       <CardContent>
         <div className="flex justify-between mb-2">
           <DatePicker />
-          {data.items.length > 0 && <ExportExcel data={data.items} />}
+          {data.items.length > 0 && (
+            <ExportExcel data={JSON.parse(JSON.stringify(data.items))} />
+          )}
         </div>
         {data.items.length > 0 ? (
           <TableSpinRecord data={data.items} />
