@@ -8,12 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import dynamic from "next/dynamic";
 import DatePicker from "./(components)/spin-records/DatePicker";
+import ExportExcel from "./(components)/spin-records/ExportExcel";
 import TableSpinRecord from "./(components)/spin-records/TableSpinRecord";
-const ExportExcel = dynamic(() =>
-  import("./(components)/spin-records/ExportExcel")
-);
 
 export default async function DashboardPage({ searchParams }) {
   const pageSize = (await searchParams).pageSize || 2;

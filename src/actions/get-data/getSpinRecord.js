@@ -15,11 +15,13 @@ export const getSpinRecord = async (
     if (startDate) {
       const start = new Date(startDate);
       query.spinAt = { ...query.spinAt, $gte: start };
-    } else if (endDate) {
+    }
+    if (endDate) {
       const end = new Date(endDate);
       end.setHours(23, 59, 59, 999);
       query.spinAt = { ...query.spinAt, $lte: end };
-    } else {
+    }
+    if (!startDate && !endDate) {
       const start = new Date("2025-01-01T00:00:00.000Z");
       const end = new Date("2025-01-21T00:00:00.000Z");
       end.setHours(23, 59, 59, 999);
