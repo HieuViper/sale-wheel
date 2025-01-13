@@ -29,7 +29,7 @@ export default async function DashboardPage({ searchParams }) {
       </CardHeader>
       <CardContent>
         <div className="flex justify-between mb-2">
-          <DatePicker />
+          <DatePicker startDate={startDate} endDate={endDate} />
           {data.items.length > 0 && (
             <ExportExcel data={JSON.parse(JSON.stringify(data.items))} />
           )}

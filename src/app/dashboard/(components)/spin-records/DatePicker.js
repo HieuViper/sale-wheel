@@ -2,7 +2,6 @@
 
 import { addDays, format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -13,13 +12,21 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default function DatePicker({ onFilter }) {
+export default function DatePicker({ startDate, endDate }) {
   const router = useRouter();
-  const [date, setDate] = React.useState({
-    from: new Date(2025, 0, 1),
-    to: addDays(new Date(2025, 0, 1), 20),
-  });
+  const [date, setDate] = useState(
+    startDate && endDate
+      ? {
+          from: new Date(startDate),
+          to: new Date(endDate),
+        }
+      : {
+          from: new Date(2025, 0, 1),
+          to: addDays(new Date(2025, 0, 1), 20),
+        }
+  );
 
   function toLocalISO(date) {
     const pad = (num) => num.toString().padStart(2, "0");
