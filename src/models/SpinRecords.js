@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import "./WheelSegments";
 
 const SpinRecordSchame = mongoose.Schema(
   {
