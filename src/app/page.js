@@ -92,7 +92,7 @@ export default function Homepage() {
         className=" lg:hidden bg-cover min-h-dvh flex  items-center flex-col pt-8 pb-20 "
         style={{ backgroundImage: "url('./background_login.webp')" }}
       >
-        <Image src="/logo_ZADEZ.png" width={100} height={50} alt="" />
+        <Image src="/Logo_ZADEZ.png" width={100} height={50} alt="" />
         <Image
           src={"/logo_login.webp"}
           width={250}
