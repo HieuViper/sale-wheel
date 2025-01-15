@@ -3,16 +3,28 @@
 import dbConnect from "@/dbConnect/dbConnect";
 import SpinRecord from "@/models/SpinRecords";
 import WheelSegments from "@/models/WheelSegments";
+import { revalidatePath } from "next/cache";
 
 export const spinWheel = async (userData) => {
   try {
     await dbConnect();
 
+    const existingBillCode = await SpinRecord.findOne({
+      billCode: userData.bill_code,
+    });
+    if (existingBillCode) {
+      return {
+        error: "Mã hóa đơn này đã được sử dụng!",
+      };
+    }
+
     const segments = await WheelSegments.find({ quantity: { $gt: 0 } });
 
     if (segments.length === 0) {
       console.log("Không còn phần thưởng khả dụng!");
-      return null;
+      return {
+        error: "Không còn phần thưởng khả dụng!",
+      };
     }
 
     const totalPercentage = segments.reduce(
@@ -22,7 +34,9 @@ export const spinWheel = async (userData) => {
 
     if (totalPercentage === 0) {
       console.log("Không có xác suất trúng thưởng!");
-      return null;
+      return {
+        error: "Không có xác suất trúng thưởng!",
+      };
     }
 
     const random = Math.random() * totalPercentage;
@@ -43,6 +57,8 @@ export const spinWheel = async (userData) => {
           totalBill: userData.total_bill,
           branch: userData.store_branch,
           prize: segment._id,
+          billCode: userData.bill_code,
+          email: userData.email,
         });
 
         await spinRecord.save();
@@ -54,6 +70,21 @@ export const spinWheel = async (userData) => {
     return null;
   } catch (error) {
     console.error("Lỗi khi quay vòng quay:", error);
-    return null;
+    return {
+      error: "Something went wrong",
+    };
+  }
+};
+
+export const clearSpinRecord = async () => {
+  try {
+    await dbConnect();
+    await SpinRecord.deleteMany({});
+    revalidatePath("/dashboard");
+  } catch (error) {
+    console.error("Lỗi khi xóa dữ liệu:", error);
+    return {
+      error: "Something went wrong",
+    };
   }
 };

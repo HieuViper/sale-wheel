@@ -27,7 +27,9 @@ export default function TableSpinRecord({ data }) {
           <TableHead>Time</TableHead>
           <TableHead>Customer Name</TableHead>
           <TableHead>Phone</TableHead>
+          <TableHead>Email</TableHead>
           <TableHead>Total Bill</TableHead>
+          <TableHead>Bill Code</TableHead>
           <TableHead>Branch</TableHead>
           <TableHead>
             <span className="sr-only">Actions</span>
@@ -44,9 +46,11 @@ export default function TableSpinRecord({ data }) {
               </TableCell>
               <TableCell className="font-medium">{item.customerName}</TableCell>
               <TableCell className="font-medium">{item.phone}</TableCell>
+              <TableCell className="font-medium">{item.email}</TableCell>
               <TableCell className="font-medium">
                 {item.totalBill.toLocaleString("en-US")}
               </TableCell>
+              <TableCell className="font-medium">{item.billCode}</TableCell>
               <TableCell className="font-medium">{item.branch}</TableCell>
               <TableCell>
                 <DropdownMenu>

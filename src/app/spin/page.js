@@ -33,8 +33,8 @@ export default function Home() {
       setLoading(true);
       const resultSpin = await spinWheel(userData);
       setLoading(false);
-      if (!resultSpin) {
-        alert("Không còn phần thưởng khả dụng!");
+      if (!resultSpin || resultSpin.error) {
+        alert(resultSpin.error || "Something went wrong");
       } else {
         setSpinning(true);
         setCouponNum(resultSpin.id - 1);
@@ -65,7 +65,7 @@ export default function Home() {
         </p>
       </div>
       <div
-        className=" lg:hidden App bg-cover bg-no-repeat h-dvh flex flex-col justify-between pt-6 pb-16"
+        className=" lg:hidden bg-cover bg-no-repeat min-h-dvh flex flex-col justify-between pt-6 pb-16"
         style={{ backgroundImage: "url('./background1.webp')" }}
       >
         <div className="sm:w-[60%] w-[100%] sm:h-[60vw] h-[100vw] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -84,18 +84,19 @@ export default function Home() {
         {/* Modal */}
         {showModal && resultWinSpin && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-gradient-to-br from-yellow-100 to-yellow-300 border-4 border-yellow-500 shadow-xl rounded-lg p-6 w-[95%] ">
-              <h2 className="text-red-600 text-2xl font-bold text-center">
-                🎉 Kết Quả 🎉
-              </h2>
-              <p className="text-center text-green-600 font-semibold mt-4 text-lg">
+            <div
+              className="w-[90%] bg-contain bg-no-repeat min-h-[200px] flex flex-col  items-center"
+              style={{ backgroundImage: "url('./bg-popup.webp')" }}
+            >
+              <div className="h-[64px]"></div>
+              <div className="font-avo font-bold text-[#7d0104] text-2xl">
                 {resultWinSpin.label}
-              </p>
+              </div>
               <button
                 onClick={closeModal}
-                className="mt-6 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md font-medium"
+                className="mt-4 w-fit bg-[#7d0104] text-[#fef783] py-2 px-6 rounded-full font-medium"
               >
-                Đóng và Quay Lại Trang Chủ
+                Xác nhận
               </button>
             </div>
           </div>
@@ -105,8 +106,8 @@ export default function Home() {
           <Image
             src="/Text2.webp"
             alt=""
-            width={250}
-            height={200}
+            width={200}
+            height={150}
             className=""
           />
         </div>

@@ -7,12 +7,14 @@ export default function ExportExcel({ data }) {
   const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
   const transformData = data.map((item) => ({
-    branch: item.branch,
     customerName: item.customerName,
     phone: item.phone,
+    email: item.email,
     prize: item.prize.label,
     spinAt: formatDateTimeToCustomString(new Date(item.spinAt)),
     totalBill: item.totalBill,
+    branch: item.branch,
+    billCode: item.billCode,
   }));
 
   const csv = generateCsv(csvConfig)(transformData);

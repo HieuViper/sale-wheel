@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { formatCurrency, parseCurrency } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -38,6 +39,8 @@ const FormSchema = z.object({
   store_branch: z.enum(["aeon_binh_tan", "aeon_tan_phu", "aeon_binh_duong"], {
     errorMap: () => ({ message: "Chi nhánh không hợp lệ" }),
   }),
+  email: z.union([z.literal(""), z.string().email()]),
+  bill_code: z.string().min(1, "Mã hóa đơn này không hợp lệ"),
 });
 
 export default function Homepage() {
@@ -49,6 +52,8 @@ export default function Homepage() {
       phone: "",
       total_bill: "",
       store_branch: undefined,
+      email: "",
+      bill_code: "",
     },
   });
 
@@ -84,9 +89,18 @@ export default function Homepage() {
         </p>
       </div>
       <div
-        className=" lg:hidden bg-cover bg-no-repeat h-dvh flex flex-col justify-end pb-20 "
+        className=" lg:hidden bg-cover min-h-dvh flex  items-center flex-col pt-8 pb-20 "
         style={{ backgroundImage: "url('./background_login.webp')" }}
       >
+        <Image src="/logo_ZADEZ.png" width={100} height={50} alt="" />
+        <Image
+          src={"/logo_login.webp"}
+          width={250}
+          height={300}
+          alt=""
+          className="mb-10"
+        />
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -120,6 +134,40 @@ export default function Homepage() {
                         {...field}
                         placeholder="Số điện thoại"
                         inputMode="numeric"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="grid gap-2 w-full">
+                    <FormControl>
+                      <Input
+                        className="bg-white py-6 border-[#ccc] text-neutral-900"
+                        {...field}
+                        placeholder="Email (nếu có)"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="bill_code"
+                render={({ field }) => (
+                  <FormItem className="grid gap-2 w-full">
+                    <FormControl>
+                      <Input
+                        className="bg-white py-6 border-[#ccc] text-neutral-900"
+                        {...field}
+                        placeholder="Mã hóa đơn"
                       />
                     </FormControl>
                     <FormMessage />
@@ -175,7 +223,7 @@ export default function Homepage() {
                               AEON Tân Phú
                             </SelectItem>
                             <SelectItem value="aeon_binh_duong">
-                              Aeon Bình Dương
+                              AEON Bình Dương
                             </SelectItem>
                           </SelectGroup>
                         </SelectContent>

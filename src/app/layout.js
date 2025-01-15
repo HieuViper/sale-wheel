@@ -1,3 +1,4 @@
+import ProvidersProgressBar from "@/components/ProgressBarProvider";
 import { ThemeProvider } from "@/components/theme-provider";
 import StyledComponentsRegistry from "@/lib/registry";
 import { Geist } from "next/font/google";
@@ -52,7 +53,7 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <ProvidersProgressBar>{children}</ProvidersProgressBar>
             <Toaster position="top-right" />
           </ThemeProvider>
         </StyledComponentsRegistry>

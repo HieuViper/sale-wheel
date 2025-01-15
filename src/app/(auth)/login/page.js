@@ -55,7 +55,7 @@ export default function FormLogin() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="min-w-[600px] space-y-3 mt-[1rem]"
+          className="min-w-[400px] lg:min-w-[600px] space-y-3 mt-[1rem]"
         >
           <Card className="w-full max-w-sm  mx-auto">
             <CardHeader>

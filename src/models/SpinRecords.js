@@ -16,6 +16,12 @@ const SpinRecordSchame = mongoose.Schema(
       ref: "WheelSegments",
       required: true,
     },
+    billCode: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: { type: String },
     spinAt: { type: Date, default: Date.now }, // Thời gian quay
   },
   {
