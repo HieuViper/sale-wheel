@@ -22,7 +22,7 @@ const SpinRecordSchame = mongoose.Schema(
       unique: true,
     },
     email: { type: String },
-    spinAt: { type: Date, default: Date.now }, // Thời gian quay
+    spinAt: { type: Date, default: () => Date.now() + 7 * 60 * 60 * 1000 }, // Thời gian quay
   },
   {
     timestamps: true,

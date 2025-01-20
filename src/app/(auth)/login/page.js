@@ -47,6 +47,8 @@ export default function FormLogin() {
 
     if (res?.error) {
       toast.error(res?.error);
+    } else {
+      router.push("/dashboard");
     }
   }
 

@@ -21,6 +21,7 @@ export default async function DashboardPage({ searchParams }) {
   const endDate = (await searchParams).endDate || null;
 
   const data = await getSpinRecord(pageSize, pageIndex, startDate, endDate);
+  console.log("🚀 ~ DashboardPage ~ data:", data);
 
   return (
     <Card>

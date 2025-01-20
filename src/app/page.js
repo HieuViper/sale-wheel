@@ -150,7 +150,7 @@ export default function Homepage() {
                       <Input
                         className="bg-white py-6 border-[#ccc] text-neutral-900"
                         {...field}
-                        placeholder="Email (nếu có)"
+                        placeholder="Email"
                       />
                     </FormControl>
                     <FormMessage />
