@@ -35,30 +35,21 @@ export function deleteAttributeInSearchParams(searchParams, attributes) {
   return searchParamsUrl;
 }
 
-export function formatDateTimeToCustomString(date) {
-  // Original datetime string
-  let originalDatetimeStr = date;
+export function formatDateTimeToCustomString(isoDate) {
+  const [datePart, timePart] = isoDate.split("T"); // Phân tách ngày và giờ
+  const [year, month, day] = datePart.split("-"); // Tách phần ngày
+  const [hour, minute] = timePart.split(":"); // Tách phần giờ phút
 
-  // Parse the original datetime string into a Date object
-  let originalDate = new Date(originalDatetimeStr);
+  // Chuyển đổi giờ từ 24h sang 12h với AM/PM
+  const hourInt = parseInt(hour, 10);
+  const period = hourInt >= 12 ? "PM" : "AM";
+  const formattedHour = hourInt % 12 || 12; // Chuyển đổi giờ về 12h (12 giờ sáng là 12, không phải 0)
 
-  const pad = (num, size) => {
-    return ("000" + num).slice(-size);
-  };
-
-  let formattedDatetime =
-    pad(originalDate.getDate(), 2) +
-    "-" +
-    pad(originalDate.getMonth() + 1, 2) +
-    "-" +
-    originalDate.getFullYear() +
-    " " +
-    pad(originalDate.getHours() % 12 || 12, 2) +
-    ":" +
-    pad(originalDate.getMinutes(), 2) +
-    " " +
-    (originalDate.getHours() >= 12 ? "PM" : "AM");
-  return formattedDatetime;
+  // Ghép lại theo định dạng mong muốn
+  return `${day}-${month}-${year} ${String(formattedHour).padStart(
+    2,
+    "0"
+  )}:${minute} ${period}`;
 }
 
 export const formatCurrency = (value) => {

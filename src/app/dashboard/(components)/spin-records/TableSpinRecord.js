@@ -42,8 +42,7 @@ export default function TableSpinRecord({ data }) {
             <TableRow key={item._id}>
               <TableCell className="font-medium">{item.prize.label}</TableCell>
               <TableCell className="font-medium">
-                {formatDateTimeToCustomString(item.spinAt.toString())}
-                {/* {item.spinAt.toString()} */}
+                {formatDateTimeToCustomString(item.spinAt.toISOString())}
               </TableCell>
               <TableCell className="font-medium">{item.customerName}</TableCell>
               <TableCell className="font-medium">{item.phone}</TableCell>

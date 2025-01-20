@@ -11,7 +11,7 @@ export default function ExportExcel({ data }) {
     phone: item.phone,
     email: item.email,
     prize: item.prize.label,
-    spinAt: formatDateTimeToCustomString(item.spinAt.toString()),
+    spinAt: formatDateTimeToCustomString(item.spinAt),
     totalBill: item.totalBill,
     branch: item.branch,
     billCode: item.billCode,
