@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import ButtonClearData from "./(components)/spin-records/ButtonClearData";
 import DatePicker from "./(components)/spin-records/DatePicker";
 import ExportExcel from "./(components)/spin-records/ExportExcel";
 import TableSpinRecord from "./(components)/spin-records/TableSpinRecord";
@@ -33,7 +32,7 @@ export default async function DashboardPage({ searchParams }) {
         <div className="flex justify-between mb-2">
           <div className="">
             <DatePicker startDate={startDate} endDate={endDate} />
-            <ButtonClearData />
+            {/* <ButtonClearData /> */}
           </div>
           {data.items.length > 0 && (
             <ExportExcel data={JSON.parse(JSON.stringify(data.items))} />
